@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cn.wormholestack.mse</groupId>
+        <artifactId>MSE-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <groupId>cn.wormholestack.mse</groupId>
+    <artifactId>MSE-test</artifactId>
+    <name>MSE-test</name>
+    <description>MSE-test</description>
+    <packaging>jar</packaging>
+
+    <!--licenses-->
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <!--scm-->
+    <scm>
+        <url>https://gitee.com/wormholestack/MSE</url>
+        <connection>https://gitee.com/wormholestack/MSE.git</connection>
+        <developerConnection>https://gitee.com/wormholestack/MSE</developerConnection>
+    </scm>
+
+    <!--developer-->
+    <developers>
+        <developer>
+            <name>MRyan</name>
+            <email>ryan.m@qq.com</email>
+            <url>http://www.wormholestack.cn/</url>
+        </developer>
+    </developers>
+
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+
+    <dependencies>
+        <!--项目内模块间依赖引用-->
+        <dependency>
+            <groupId>cn.wormholestack.mse</groupId>
+            <artifactId>MSE-biz</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.wormholestack.mse</groupId>
+            <artifactId>MSE-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.wormholestack.mse</groupId>
+            <artifactId>MSE-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.wormholestack.mse</groupId>
+            <artifactId>MSE-dal</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.wormholestack.mse</groupId>
+            <artifactId>MSE-facade</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.wormholestack.mse</groupId>
+            <artifactId>MSE-facadeImpl</artifactId>
+        </dependency>
+        <!--框架基本建设依赖引用 Start-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!--框架基本建设依赖引用 END-->
+
+        <!--功能模块依赖引用 START-->
+
+        <!--功能模块依赖引用 END-->
+
+    </dependencies>
+
+
+</project>
