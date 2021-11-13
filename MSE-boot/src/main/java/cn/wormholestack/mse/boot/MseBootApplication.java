@@ -24,7 +24,7 @@ public class MseBootApplication {
     static Logger logger = LoggerFactory.getLogger(MseBootApplication.class);
 
     public static void main(String[] args) {
-        logger.info("MSE服务 容器启动中....");
+        logger.info("MSE Service container is starting");
         SpringApplication.run(MseBootApplication.class, args);
     }
 

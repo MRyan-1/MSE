@@ -65,6 +65,16 @@
         </dependency>
         <!--项目内模块间依赖引用 END-->
 
+        <!--功能模块依赖引用 START-->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-jdk8</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+        </dependency>
+        <!--功能模块依赖引用 END-->
     </dependencies>
 
 </project>
