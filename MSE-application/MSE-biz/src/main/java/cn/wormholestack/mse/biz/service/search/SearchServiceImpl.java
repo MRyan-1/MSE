@@ -3,6 +3,7 @@ package cn.wormholestack.mse.biz.service.search;
 import cn.wormholestack.mse.biz.gateway.ProxyService;
 import cn.wormholestack.mse.common.annotation.MSEGateway;
 import cn.wormholestack.mse.common.enums.GatewayServiceEnum;
+import cn.wormholestack.mse.common.exception.ServiceException;
 import cn.wormholestack.mse.common.model.base.ResponseContext;
 import cn.wormholestack.mse.common.model.search.QueryResVO;
 import cn.wormholestack.mse.common.model.search.SearchReqVO;
@@ -27,7 +28,7 @@ public class SearchServiceImpl implements ProxyService<SearchReqVO, SearchResVO>
     private Logger logger = LoggerFactory.getLogger(SearchServiceImpl.class);
 
     @Override
-    public ResponseContext<SearchResVO> invoke(SearchReqVO inVO) {
+    public ResponseContext<SearchResVO> invoke(SearchReqVO inVO) throws ServiceException {
         //test
         logger.info("搜索服务");
         ResponseContext<SearchResVO> context = new ResponseContext<>();
@@ -41,6 +42,7 @@ public class SearchServiceImpl implements ProxyService<SearchReqVO, SearchResVO>
         queryResVOS.add(queryResVO);
         searchResVO.setData(queryResVOS);
         context.setResponse(searchResVO);
+        context.setSuccess(true);
         return context;
     }
 }

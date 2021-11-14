@@ -1,5 +1,6 @@
 package cn.wormholestack.mse.facadeimpl.validator;
 
+import cn.wormholestack.mse.common.exception.ValidateException;
 import cn.wormholestack.mse.common.model.base.BaseReq;
 
 /**
@@ -10,5 +11,5 @@ import cn.wormholestack.mse.common.model.base.BaseReq;
  */
 public interface Validator<Req extends BaseReq> {
 
-    void validate(Req req);
+    void validate(Req req) throws ValidateException;
 }

@@ -14,7 +14,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString
 public class QueryResVO extends BaseVO {
 
     /**
@@ -36,5 +35,10 @@ public class QueryResVO extends BaseVO {
      * 预留，用做网页的摘要
      */
     private String docTitle;
+
+    /**
+     * 预留，图片url
+     */
+    private String imgUrl;
 
 }

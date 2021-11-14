@@ -1,5 +1,6 @@
 package cn.wormholestack.mse.biz.gateway;
 
+import cn.wormholestack.mse.common.exception.ServiceException;
 import cn.wormholestack.mse.common.model.base.ResponseContext;
 
 /**
@@ -10,5 +11,5 @@ import cn.wormholestack.mse.common.model.base.ResponseContext;
  */
 public interface ProxyService<Req, Res> {
 
-    ResponseContext<Res> invoke(Req inVO);
+    ResponseContext<Res> invoke(Req inVO) throws ServiceException;
 }

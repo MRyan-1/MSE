@@ -15,8 +15,6 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@ToString
 public class SearchRes extends BaseRes {
 
     /**

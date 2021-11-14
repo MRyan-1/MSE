@@ -1,5 +1,6 @@
 package cn.wormholestack.mse.facadeimpl.converter;
 
+import cn.wormholestack.mse.common.exception.ConverterException;
 import cn.wormholestack.mse.common.model.base.BaseReq;
 import cn.wormholestack.mse.common.model.base.BaseRes;
 import cn.wormholestack.mse.common.model.base.ResponseContext;
@@ -18,7 +19,7 @@ public interface Converter<ReqDTO extends BaseReq, ResDTO extends BaseRes, ReqVO
      * @param request 网关请求参数
      * @return 业务层入参模型
      */
-    ReqVO requestToVO(ReqDTO request);
+    ReqVO requestToVO(ReqDTO request) throws ConverterException;
 
     /**
      * 业务层返回的数据模型转换层网关需要的应答参数
@@ -26,7 +27,7 @@ public interface Converter<ReqDTO extends BaseReq, ResDTO extends BaseRes, ReqVO
      * @param vo 业务层返回的数据模型
      * @return 网关应答参数
      */
-    ResDTO voToResponse(ResponseContext<ResVO> vo);
+    ResDTO voToResponse(ResponseContext<ResVO> vo) throws ConverterException;
 
 
 }

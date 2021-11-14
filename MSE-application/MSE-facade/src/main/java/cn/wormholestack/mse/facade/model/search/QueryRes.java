@@ -12,7 +12,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString
 public class QueryRes {
 
     /**
@@ -34,5 +33,10 @@ public class QueryRes {
      * 标题预留，用做网页的摘要
      */
     private String docTitle;
+
+    /**
+     * 预留，图片url
+     */
+    private String imgUrl;
 
 }

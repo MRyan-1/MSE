@@ -2,6 +2,7 @@ package cn.wormholestack.mse.facadeimpl.validator;
 
 import cn.wormholestack.mse.common.annotation.MSEGateway;
 import cn.wormholestack.mse.common.enums.GatewayServiceEnum;
+import cn.wormholestack.mse.common.exception.ValidateException;
 import cn.wormholestack.mse.facade.model.search.SearchReq;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +14,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @MSEGateway(Service = GatewayServiceEnum.SEARCH)
-public class SearchValidator implements Validator<SearchReq> {
+public class SearchValidator extends BaseValidator implements Validator<SearchReq> {
 
     @Override
-    public void validate(SearchReq req) {
-
+    public void validate(SearchReq req) throws ValidateException {
+        dtoNotNullValidate(req);
     }
 }

@@ -2,8 +2,7 @@ package cn.wormholestack.mse.facadeimpl.converter;
 
 import cn.wormholestack.mse.common.annotation.MSEGateway;
 import cn.wormholestack.mse.common.enums.GatewayServiceEnum;
-import cn.wormholestack.mse.common.model.base.BaseRes;
-import cn.wormholestack.mse.common.model.base.BaseVO;
+import cn.wormholestack.mse.common.exception.ConverterException;
 import cn.wormholestack.mse.common.model.base.ResponseContext;
 import cn.wormholestack.mse.common.model.search.SearchReqVO;
 import cn.wormholestack.mse.common.model.search.SearchResVO;
@@ -28,12 +27,12 @@ public class SearchConverter implements Converter<SearchReq, SearchRes, SearchRe
     private SearchMapper searchMapper;
 
     @Override
-    public SearchReqVO requestToVO(SearchReq req) {
+    public SearchReqVO requestToVO(SearchReq req) throws ConverterException {
         return searchMapper.dto2vo(req);
     }
 
     @Override
-    public SearchRes voToResponse(ResponseContext<SearchResVO> vo) {
+    public SearchRes voToResponse(ResponseContext<SearchResVO> vo) throws ConverterException {
         SearchRes searchRes = new SearchRes();
         searchRes.setSuccess(vo.isSuccess());
         searchRes.setCode(vo.getCode());

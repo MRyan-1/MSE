@@ -1,7 +1,12 @@
 package cn.wormholestack.mse.facadeimpl.impl;
 
 import cn.wormholestack.mse.biz.gateway.ProxyService;
+import cn.wormholestack.mse.common.constant.ErrorMsgConstant;
 import cn.wormholestack.mse.common.enums.GatewayServiceEnum;
+import cn.wormholestack.mse.common.exception.ConverterException;
+import cn.wormholestack.mse.common.exception.MSEException;
+import cn.wormholestack.mse.common.exception.ServiceException;
+import cn.wormholestack.mse.common.exception.ValidateException;
 import cn.wormholestack.mse.common.model.base.BaseReq;
 import cn.wormholestack.mse.common.model.base.BaseRes;
 import cn.wormholestack.mse.common.model.base.ResponseContext;
@@ -41,7 +46,7 @@ public class DefaultGatewayServiceEntrance<Req extends BaseReq, Res extends Base
     public Res invoke(GatewayServiceEnum gatewayMethod, Req req, Res res) {
         GatewayContext<InVO, OutVO> context = new GatewayContext<>(gatewayMethod);
         context.getStopWatch().start();
-        Res result;
+        Res result = null;
         logger.info("MSEGateway调用入参={}", JSON.toJSON(req));
         try {
             //0.流控
@@ -54,13 +59,22 @@ public class DefaultGatewayServiceEntrance<Req extends BaseReq, Res extends Base
             doCallService(context);
             //5.数据转换
             result = doPostConverter(context);
+            return result;
             //6.执行后置处理器
+        } catch (ValidateException e) {
+            result = getResFromException(context, res, new ValidateException(ErrorMsgConstant.VALIDATE_ERROR_MSG, e));
+            return result;
+        } catch (ConverterException e) {
+            result = getResFromException(context, res, new ConverterException(ErrorMsgConstant.CONVERTER_ERROR_MSG, e));
+            return result;
+        } catch (ServiceException e) {
+            result = getResFromException(context, res, new ServiceException(ErrorMsgConstant.SERVICE_ERROR_MSG, e));
             return result;
         } catch (Exception e) {
-            logger.error("系统异常!", e);
-            result = getResFromException(context, res, "系统异常!", new Exception(e));
+            result = getResFromException(context, res, new MSEException(ErrorMsgConstant.MSE_ERROR_MSG, e));
             return result;
         } finally {
+            logger.info("Gateway 调用出参={}", JSON.toJSONString(result));
             if (context.getStopWatch().isRunning()) {
                 context.getStopWatch().stop();
             }
@@ -73,7 +87,7 @@ public class DefaultGatewayServiceEntrance<Req extends BaseReq, Res extends Base
      * @param context
      * @return
      */
-    private Res doPostConverter(GatewayContext<InVO, OutVO> context) {
+    private Res doPostConverter(GatewayContext<InVO, OutVO> context) throws ConverterException {
         String serviceName = context.getMethod().getCode();
         Converter<Req, Res, InVO, OutVO> converter = provider.getConverter(serviceName);
         if (converter == null) {
@@ -92,7 +106,7 @@ public class DefaultGatewayServiceEntrance<Req extends BaseReq, Res extends Base
      * @param context
      * @return
      */
-    private InVO doPreConverter(Req req, GatewayContext<InVO, OutVO> context) {
+    private InVO doPreConverter(Req req, GatewayContext<InVO, OutVO> context) throws ConverterException {
         String serviceName = context.getMethod().getCode();
         Converter<Req, Res, InVO, OutVO> converter = provider.getConverter(serviceName);
         if (converter == null) {
@@ -105,7 +119,7 @@ public class DefaultGatewayServiceEntrance<Req extends BaseReq, Res extends Base
         return inVO;
     }
 
-    private void doValidation(Req req, GatewayContext<InVO, OutVO> context) {
+    private void doValidation(Req req, GatewayContext<InVO, OutVO> context) throws ValidateException {
         String serviceName = context.getMethod().getCode();
         Validator<Req> validator = provider.getValidator(serviceName);
         if (validator == null) {
@@ -116,10 +130,10 @@ public class DefaultGatewayServiceEntrance<Req extends BaseReq, Res extends Base
         context.getStopWatch().stop();
     }
 
-    private Res getResFromException(GatewayContext<InVO, OutVO> context, Res res, String msg, Exception e) {
-        logger.warn(msg + " msg={}", e.getMessage(), e);
+    private Res getResFromException(GatewayContext<InVO, OutVO> context, Res res, MSEException e) {
+        logger.warn(e.getDetailMessage() + " msg={}", e.getMessage(), e);
         res.setSuccess(false);
-        res.setMessage(msg);
+        res.setMessage(e.getDetailMessage());
         return res;
     }
 
@@ -129,7 +143,7 @@ public class DefaultGatewayServiceEntrance<Req extends BaseReq, Res extends Base
      * @param context
      * @return
      */
-    private GatewayContext<InVO, OutVO> doCallService(GatewayContext<InVO, OutVO> context) {
+    private GatewayContext<InVO, OutVO> doCallService(GatewayContext<InVO, OutVO> context) throws ServiceException {
         ProxyService<InVO, OutVO> service = provider.getProxyService(context.getMethod().getCode());
         if (service == null) {
             throw new IllegalArgumentException("[Service is invalid] cannot found  service: " + context.getMethod().getCode());
