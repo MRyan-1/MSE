@@ -52,7 +52,7 @@
         <!--项目内模块间依赖引用-->
         <dependency>
             <groupId>cn.wormholestack.mse</groupId>
-            <artifactId>MSE-biz</artifactId>
+            <artifactId>MSE-business</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.wormholestack.mse</groupId>
@@ -73,6 +73,10 @@
         <dependency>
             <groupId>cn.wormholestack.mse</groupId>
             <artifactId>MSE-facadeImpl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.wormholestack.mse</groupId>
+            <artifactId>MSE-boot</artifactId>
         </dependency>
         <!--框架基本建设依赖引用 Start-->
         <dependency>
