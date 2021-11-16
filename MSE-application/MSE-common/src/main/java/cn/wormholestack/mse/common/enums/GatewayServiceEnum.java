@@ -20,17 +20,17 @@ public enum GatewayServiceEnum {
     /**
      * 枚举编码
      */
-    private final String code;
+    private final String service;
 
     /**
      * 私有构造函数
      */
-    GatewayServiceEnum(String code) {
-        this.code = code;
+    GatewayServiceEnum(String service) {
+        this.service = service;
     }
 
-    public String getCode() {
-        return code;
+    public String getService() {
+        return service;
     }
 
 }

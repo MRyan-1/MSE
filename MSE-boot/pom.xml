@@ -55,7 +55,7 @@
         <!--项目内模块间依赖引用 START-->
         <dependency>
             <groupId>cn.wormholestack.mse</groupId>
-            <artifactId>MSE-biz</artifactId>
+            <artifactId>MSE-business</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.wormholestack.mse</groupId>
@@ -91,6 +91,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
         <!--框架基础依赖引用 END-->
 

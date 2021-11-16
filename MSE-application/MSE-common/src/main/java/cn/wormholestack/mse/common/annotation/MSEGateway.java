@@ -18,6 +18,6 @@ public @interface MSEGateway {
 
     String name() default StringUtils.EMPTY;
 
-    GatewayServiceEnum Service();
+    GatewayServiceEnum service();
 
 }

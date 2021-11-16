@@ -1,6 +1,6 @@
 package cn.wormholestack.mse.common.model.search;
 
-import cn.wormholestack.mse.common.enums.search.SearchTypeEnum;
+import cn.wormholestack.mse.common.enums.SearchTypeEnum;
 import cn.wormholestack.mse.common.model.base.BaseVO;
 import lombok.*;
 
